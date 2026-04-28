@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Titan Core – Velaura AI</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:        #080c18;
+      --surface:   #0d1225;
+      --border:    rgba(255,255,255,0.07);
+      --accent:    #00d4ff;
+      --violet:    #7c3aed;
+      --text:      #e2e8f0;
+      --muted:     #8492a6;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 40px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(13,18,37,0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+    }
+    .logo em { color: var(--accent); font-style: normal; }
+    .hdivider { width: 1px; height: 22px; background: var(--border); }
+    .badge {
+      font-size: 0.7rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── THREE-COLUMN LAYOUT ── */
+    .columns {
+      display: flex;
+      flex: 1;
+    }
+    .col {
+      flex: 1;
+      padding: 48px 36px 60px;
+      position: relative;
+    }
+    .col + .col { border-left: 1px solid var(--border); }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.68rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 26px;
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 18px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    /* ── SECTION 1: ABOUT ── */
+    .titan-name {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1;
+      background: linear-gradient(130deg, #00d4ff 0%, #7c3aed 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+    }
+    .titan-by {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+      margin-bottom: 30px;
+    }
+    .about-body {
+      font-size: 0.9rem;
+      line-height: 1.85;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .about-body strong { color: var(--text); }
+
+    .chips {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .chip {
+      background: rgba(0,212,255,0.04);
+      border: 1px solid rgba(0,212,255,0.13);
+      border-radius: 10px;
+      padding: 14px 15px;
+    }
+    .chip-icon { font-size: 1.1rem; margin-bottom: 6px; }
+    .chip-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .chip-desc { font-size: 0.7rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── SECTION 2: JOBS ── */
+    .col-title {
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .col-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .job-list { display: flex; flex-direction: column; gap: 9px; }
+    .job-card {
+      position: relative;
+      border: 1px solid rgba(124,58,237,0.18);
+      border-radius: 10px;
+      padding: 16px 18px 16px 20px;
+      background: rgba(124,58,237,0.04);
+      cursor: default;
+      transition: border-color 0.2s, background 0.2s, transform 0.18s;
+      overflow: hidden;
+    }
+    .job-card::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--accent), var(--violet));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .job-card:hover {
+      border-color: rgba(124,58,237,0.45);
+      background: rgba(124,58,237,0.09);
+      transform: translateX(4px);
+    }
+    .job-card:hover::after { opacity: 1; }
+
+    .job-title { font-size: 0.88rem; font-weight: 600; margin-bottom: 6px; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(0,212,255,0.08);
+      color: var(--accent);
+      letter-spacing: 0.2px;
+    }
+
+    /* ── SECTION 3: FORM ── */
+    .form-group { margin-bottom: 15px; }
+    label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: var(--text);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0,212,255,0.1);
+    }
+    input::placeholder { color: rgba(132,146,166,0.55); }
+
+    .file-drop {
+      position: relative;
+      width: 100%;
+      border: 1px dashed rgba(255,255,255,0.14);
+      border-radius: 8px;
+      padding: 22px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .file-drop:hover, .file-drop.dragover {
+      border-color: var(--accent);
+      background: rgba(0,212,255,0.04);
+    }
+    .file-drop input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+    .file-icon { font-size: 1.5rem; margin-bottom: 6px; }
+    .file-hint { font-size: 0.78rem; color: var(--muted); }
+    .file-hint span { color: var(--accent); }
+    .file-formats { font-size: 0.68rem; color: rgba(132,146,166,0.55); margin-top: 2px; }
+    .file-chosen { font-size: 0.75rem; color: var(--accent); margin-top: 8px; display: none; }
+
+    textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: var(--text);
+      font-size: 0.88rem;
+      font-family: inherit;
+      outline: none;
+      resize: vertical;
+      min-height: 90px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0,212,255,0.1);
+    }
+    textarea::placeholder { color: rgba(132,146,166,0.55); }
+
+    .btn-submit {
+      width: 100%;
+      margin-top: 6px;
+      padding: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--violet));
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-submit:hover:not(:disabled) {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(0,212,255,0.25);
+    }
+    .btn-submit:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+    .status-msg {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 0.83rem;
+      text-align: center;
+      line-height: 1.5;
+    }
+    .status-msg.ok {
+      display: block;
+      background: rgba(0,255,128,0.08);
+      border: 1px solid rgba(0,255,128,0.25);
+      color: #00e676;
+    }
+    .status-msg.err {
+      display: block;
+      background: rgba(255,64,64,0.08);
+      border: 1px solid rgba(255,64,64,0.25);
+      color: #ff6b6b;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .columns { flex-direction: column; }
+      .col + .col { border-left: none; border-top: 1px solid var(--border); }
+    }
+    @media (max-width: 600px) {
+      header { padding: 16px 20px; }
+      .col { padding: 36px 20px 48px; }
+      .titan-name { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Velaura <em>AI</em></div>
+  <div class="hdivider"></div>
+  <div class="badge">Titan Core Initiative</div>
+</header>
+
+<div class="columns">
+
+  <!-- ── SECTION 1: ABOUT ── -->
+  <div class="col">
+    <div class="eyebrow">About</div>
+    <div class="titan-name">Titan Core</div>
+    <div class="titan-by">by Velaura AI</div>
+
+    <p class="about-body">
+      <strong>Titan Core</strong> is Velaura AI's flagship silicon program — purpose-built
+      for the demands of robotics, physical AI, and next-generation autonomous systems.
+    </p>
+    <p class="about-body">
+      We're building the foundational compute architecture that will power the physical world.
+      Titan Core integrates <strong>high-efficiency neural processing</strong>,
+      <strong>real-time sensor fusion</strong>, and
+      <strong>ultra-low-latency actuation pipelines</strong> into a unified SoC platform
+      designed to operate at the edge, in motion, and under constraint.
+    </p>
+    <p class="about-body">
+      At Velaura, we believe the next frontier of AI is not in the cloud — it's in the machine.
+      Titan Core is our bet on that future.
+    </p>
+
+    <div class="chips">
+      <div class="chip">
+        <div class="chip-icon">⚡</div>
+        <div class="chip-title">Edge-Native Performance</div>
+        <div class="chip-desc">Real-time inference without cloud dependency</div>
+      </div>
+      <div class="chip">
+        <div class="chip-icon">🤖</div>
+        <div class="chip-title">Physical AI Ready</div>
+        <div class="chip-desc">Co-designed with robotics models & control stacks</div>
+      </div>
+      <div class="chip">
+        <div class="chip-icon">🔬</div>
+        <div class="chip-title">Hardware–Model Co-Design</div>
+        <div class="chip-desc">Silicon and AI in tight feedback loops</div>
+      </div>
+      <div class="chip">
+        <div class="chip-icon">📡</div>
+        <div class="chip-title">Sensor Fusion Core</div>
+        <div class="chip-desc">Unified perception pipeline across modalities</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: OPEN JOBS ── -->
+  <div class="col">
+    <div class="eyebrow">Careers</div>
+    <div class="col-title">Open Roles</div>
+    <p class="col-sub">
+      We're assembling a world-class team to build the compute backbone of intelligent machines.
+      These are foundational roles with outsized impact.
+    </p>
+
+    <div class="job-list">
+      <div class="job-card">
+        <div class="job-title">SoC Architect – Robotics &amp; Physical AI</div>
+        <div class="tags">
+          <span class="tag">Hardware</span>
+          <span class="tag">SoC Design</span>
+          <span class="tag">Full-time</span>
+        </div>
+      </div>
+      <div class="job-card">
+        <div class="job-title">Robotics &amp; Autonomy Systems Architect</div>
+        <div class="tags">
+          <span class="tag">Robotics</span>
+          <span class="tag">Autonomy</span>
+          <span class="tag">Full-time</span>
+        </div>
+      </div>
+      <div class="job-card">
+        <div class="job-title">Performance Modeling Architect – AI Systems</div>
+        <div class="tags">
+          <span class="tag">Modeling</span>
+          <span class="tag">AI Systems</span>
+          <span class="tag">Full-time</span>
+        </div>
+      </div>
+      <div class="job-card">
+        <div class="job-title">AI Systems Architect (Models &amp; Hardware Co-Design)</div>
+        <div class="tags">
+          <span class="tag">Co-Design</span>
+          <span class="tag">AI Hardware</span>
+          <span class="tag">Full-time</span>
+        </div>
+      </div>
+      <div class="job-card">
+        <div class="job-title">AI Research Architect</div>
+        <div class="tags">
+          <span class="tag">Research</span>
+          <span class="tag">AI / ML</span>
+          <span class="tag">Full-time</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 3: CONTACT FORM ── -->
+  <div class="col">
+    <div class="eyebrow">Apply</div>
+    <div class="col-title">Get in Touch</div>
+    <p class="col-sub">
+      Interested in joining Titan Core? Share your details and we'll reach out about the
+      opportunity that best fits your background.
+    </p>
+
+    <form id="appForm" novalidate>
+      <div class="form-group">
+        <label for="fname">Full Name</label>
+        <input type="text" id="fname" placeholder="Jane Smith" required />
+      </div>
+      <div class="form-group">
+        <label for="fphone">Phone Number <span style="font-weight:400;text-transform:none;letter-spacing:0;color:rgba(132,146,166,0.6)">(optional)</span></label>
+        <input type="tel" id="fphone" placeholder="+1 (555) 000-0000" />
+      </div>
+      <div class="form-group">
+        <label for="femail">Email Address</label>
+        <input type="email" id="femail" placeholder="jane@company.com" required />
+      </div>
+      <div class="form-group">
+        <label for="fmessage">Message</label>
+        <textarea id="fmessage" placeholder="Tell us about yourself and which role interests you…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Resume / CV <span style="font-weight:400;text-transform:none;letter-spacing:0;color:rgba(132,146,166,0.6)">(optional)</span></label>
+        <div class="file-drop" id="fileDrop">
+          <input type="file" id="fresume" accept=".pdf,.doc,.docx" />
+          <div class="file-icon">📎</div>
+          <div class="file-hint">Drop file here or <span>browse</span></div>
+          <div class="file-formats">PDF · DOC · DOCX &nbsp;·&nbsp; max 10 MB</div>
+          <div class="file-chosen" id="fileChosen"></div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" id="submitBtn">Submit Application</button>
+      <div class="status-msg" id="statusMsg"></div>
+    </form>
+  </div>
+
+</div>
+
+<script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxe8MtBeBNySzY4bVt30tZxCNZIgweKZZSwJSdxEamWYEkk5ZXOm0qBh9_kMUknXsCl/exec';
+
+  const resumeInput = document.getElementById('fresume');
+  const fileChosen  = document.getElementById('fileChosen');
+  const fileDrop    = document.getElementById('fileDrop');
+
+  resumeInput.addEventListener('change', () => {
+    const f = resumeInput.files[0];
+    fileChosen.textContent = f ? '✓ ' + f.name : '';
+    fileChosen.style.display = f ? 'block' : 'none';
+  });
+
+  ['dragover', 'dragleave', 'drop'].forEach(evt =>
+    fileDrop.addEventListener(evt, e => {
+      e.preventDefault();
+      fileDrop.classList.toggle('dragover', evt === 'dragover');
+    })
+  );
+
+  document.getElementById('appForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const btn    = document.getElementById('submitBtn');
+    const status = document.getElementById('statusMsg');
+
+    const name    = document.getElementById('fname').value.trim();
+    const phone   = document.getElementById('fphone').value.trim();
+    const email   = document.getElementById('femail').value.trim();
+    const message = document.getElementById('fmessage').value.trim();
+    const file    = resumeInput.files[0];
+
+    if (!name || !email) {
+      status.textContent = 'Name and email are required.';
+      status.className = 'status-msg err';
+      return;
+    }
+
+    btn.disabled    = true;
+    btn.textContent = 'Uploading…';
+    status.className = 'status-msg';
+
+    const submit = (resumeName, resumeType, resumeData) => {
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ name, phone, email, message, resumeName, resumeType, resumeData })
+      })
+        .then(() => {
+          status.textContent = '✓ Application submitted! We\'ll be in touch soon.';
+          status.className = 'status-msg ok';
+          document.getElementById('appForm').reset();
+          fileChosen.style.display = 'none';
+        })
+        .catch(() => {
+          status.textContent = '✗ Something went wrong. Please try again.';
+          status.className = 'status-msg err';
+        })
+        .finally(() => {
+          btn.disabled    = false;
+          btn.textContent = 'Submit Application';
+        });
+    };
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = ev => submit(file.name, file.type || 'application/octet-stream', ev.target.result);
+      reader.readAsDataURL(file);
+    } else {
+      submit('', '', '');
+    }
+  });
+</script>
+
+</body>
+</html>
