@@ -11,8 +11,8 @@
       --bg:        #080c18;
       --surface:   #0d1225;
       --border:    rgba(255,255,255,0.07);
-      --accent:    #00d4ff;
-      --violet:    #7c3aed;
+      --accent:    #4ACEFF;
+      --violet:    #0475FF;
       --text:      #e2e8f0;
       --muted:     #8492a6;
     }
@@ -85,21 +85,21 @@
 
     /* ── SECTION 1: ABOUT ── */
     .titan-name {
-      font-size: 3rem;
+      font-size: 2.8rem;
       font-weight: 800;
-      letter-spacing: -1.5px;
+      letter-spacing: -2px;
       line-height: 1;
-      background: linear-gradient(130deg, #00d4ff 0%, #7c3aed 100%);
+      background: linear-gradient(130deg, #0475FF 0%, #97E3FF 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 4px;
+      margin-bottom: 24px;
     }
     .titan-by {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--muted);
       letter-spacing: 0.5px;
-      margin-bottom: 30px;
+      margin-bottom: 48px;
     }
     .about-body {
       font-size: 0.9rem;
@@ -116,8 +116,8 @@
       margin-top: 28px;
     }
     .chip {
-      background: rgba(0,212,255,0.04);
-      border: 1px solid rgba(0,212,255,0.13);
+      background: rgba(74,206,255,0.04);
+      border: 1px solid rgba(74,206,255,0.13);
       border-radius: 10px;
       padding: 14px 15px;
     }
@@ -147,10 +147,10 @@
     .job-list { display: flex; flex-direction: column; gap: 9px; }
     .job-card {
       position: relative;
-      border: 1px solid rgba(124,58,237,0.18);
+      border: 1px solid rgba(4,117,255,0.18);
       border-radius: 10px;
       padding: 16px 18px 16px 20px;
-      background: rgba(124,58,237,0.04);
+      background: rgba(4,117,255,0.04);
       cursor: default;
       transition: border-color 0.2s, background 0.2s, transform 0.18s;
       overflow: hidden;
@@ -165,8 +165,8 @@
       transition: opacity 0.2s;
     }
     .job-card:hover {
-      border-color: rgba(124,58,237,0.45);
-      background: rgba(124,58,237,0.09);
+      border-color: rgba(4,117,255,0.45);
+      background: rgba(4,117,255,0.09);
       transform: translateX(4px);
     }
     .job-card:hover::after { opacity: 1; }
@@ -177,7 +177,7 @@
       font-size: 0.65rem;
       padding: 2px 8px;
       border-radius: 4px;
-      background: rgba(0,212,255,0.08);
+      background: rgba(74,206,255,0.08);
       color: var(--accent);
       letter-spacing: 0.2px;
     }
@@ -210,7 +210,7 @@
     input[type="email"]:focus,
     input[type="tel"]:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(0,212,255,0.1);
+      box-shadow: 0 0 0 3px rgba(74,206,255,0.1);
     }
     input::placeholder { color: rgba(132,146,166,0.55); }
 
@@ -226,7 +226,7 @@
     }
     .file-drop:hover, .file-drop.dragover {
       border-color: var(--accent);
-      background: rgba(0,212,255,0.04);
+      background: rgba(74,206,255,0.04);
     }
     .file-drop input[type="file"] {
       position: absolute;
@@ -258,7 +258,7 @@
     }
     textarea:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(0,212,255,0.1);
+      box-shadow: 0 0 0 3px rgba(74,206,255,0.1);
     }
     textarea::placeholder { color: rgba(132,146,166,0.55); }
 
@@ -279,7 +279,7 @@
     .btn-submit:hover:not(:disabled) {
       opacity: 0.9;
       transform: translateY(-1px);
-      box-shadow: 0 6px 24px rgba(0,212,255,0.25);
+      box-shadow: 0 6px 24px rgba(74,206,255,0.25);
     }
     .btn-submit:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
 
@@ -331,46 +331,14 @@
   <div class="col">
     <div class="eyebrow">About</div>
     <div class="titan-name">Titan Core</div>
-    <div class="titan-by">by Velaura AI</div>
 
     <p class="about-body">
-      <strong>Titan Core</strong> is Velaura AI's flagship silicon program — purpose-built
-      for the demands of robotics, physical AI, and next-generation autonomous systems.
+      Velaura AI, Inc. (formerly Auradine) is a leader in ultra-low power compute solutions for data center, edge, and physical AI applications. Power is becoming the critical bottleneck for AI infrastructure at scale. Velaura's patented technology, <strong>Titan Core™</strong>, helps AI compute platforms deliver dramatically higher power efficiency.
     </p>
     <p class="about-body">
-      We're building the foundational compute architecture that will power the physical world.
-      Titan Core integrates <strong>high-efficiency neural processing</strong>,
-      <strong>real-time sensor fusion</strong>, and
-      <strong>ultra-low-latency actuation pipelines</strong> into a unified SoC platform
-      designed to operate at the edge, in motion, and under constraint.
-    </p>
-    <p class="about-body">
-      At Velaura, we believe the next frontier of AI is not in the cloud — it's in the machine.
-      Titan Core is our bet on that future.
+      Titan Core™ enables up to <strong>2X lower overall chip power</strong>, with potential savings of up to <strong>500W per XPU</strong> and substantial reductions in energy, cooling, and infrastructure costs at hyperscale.<br><br>Built on a production-proven foundation with tens of millions of ASICs deployed with world-class yield and reliability, Titan Core™ integrates seamlessly into existing architectures while delivering meaningful improvements in total cost of ownership.
     </p>
 
-    <div class="chips">
-      <div class="chip">
-        <div class="chip-icon">⚡</div>
-        <div class="chip-title">Edge-Native Performance</div>
-        <div class="chip-desc">Real-time inference without cloud dependency</div>
-      </div>
-      <div class="chip">
-        <div class="chip-icon">🤖</div>
-        <div class="chip-title">Physical AI Ready</div>
-        <div class="chip-desc">Co-designed with robotics models & control stacks</div>
-      </div>
-      <div class="chip">
-        <div class="chip-icon">🔬</div>
-        <div class="chip-title">Hardware–Model Co-Design</div>
-        <div class="chip-desc">Silicon and AI in tight feedback loops</div>
-      </div>
-      <div class="chip">
-        <div class="chip-icon">📡</div>
-        <div class="chip-title">Sensor Fusion Core</div>
-        <div class="chip-desc">Unified perception pipeline across modalities</div>
-      </div>
-    </div>
   </div>
 
   <!-- ── SECTION 2: OPEN JOBS ── -->
@@ -429,12 +397,7 @@
   <!-- ── SECTION 3: CONTACT FORM ── -->
   <div class="col">
     <div class="eyebrow">Apply</div>
-    <div class="col-title">Get in Touch</div>
-    <p class="col-sub">
-      Interested in joining Titan Core? Share your details and we'll reach out about the
-      opportunity that best fits your background.
-    </p>
-
+    <div class="col-title" style="margin-bottom: 20px;">Get in Touch</div>
     <form id="appForm" novalidate>
       <div class="form-group">
         <label for="fname">Full Name</label>
@@ -453,7 +416,7 @@
         <textarea id="fmessage" placeholder="Tell us about yourself and which role interests you…"></textarea>
       </div>
       <div class="form-group">
-        <label>Resume / CV <span style="font-weight:400;text-transform:none;letter-spacing:0;color:rgba(132,146,166,0.6)">(optional)</span></label>
+        <label>File Upload<span style="font-weight:400;text-transform:none;letter-spacing:0;color:rgba(132,146,166,0.6)">(optional)</span></label>
         <div class="file-drop" id="fileDrop">
           <input type="file" id="fresume" accept=".pdf,.doc,.docx" />
           <div class="file-icon">📎</div>
@@ -509,39 +472,46 @@
     }
 
     btn.disabled    = true;
-    btn.textContent = 'Uploading…';
+    btn.textContent = file ? 'Uploading…' : 'Submitting…';
     status.className = 'status-msg';
 
-    const submit = (resumeName, resumeType, resumeData) => {
-      fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({ name, phone, email, message, resumeName, resumeType, resumeData })
-      })
-        .then(() => {
-          status.textContent = '✓ Application submitted! We\'ll be in touch soon.';
-          status.className = 'status-msg ok';
-          document.getElementById('appForm').reset();
-          fileChosen.style.display = 'none';
-        })
-        .catch(() => {
-          status.textContent = '✗ Something went wrong. Please try again.';
-          status.className = 'status-msg err';
-        })
-        .finally(() => {
-          btn.disabled    = false;
-          btn.textContent = 'Submit Application';
-        });
+    const post = body => fetch(SCRIPT_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(body)
+    });
+
+    const onDone = () => {
+      status.textContent = '✓ Application submitted! We\'ll be in touch soon.';
+      status.className = 'status-msg ok';
+      document.getElementById('appForm').reset();
+      fileChosen.style.display = 'none';
+      btn.disabled    = false;
+      btn.textContent = 'Submit Application';
     };
 
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = ev => submit(file.name, file.type || 'application/octet-stream', ev.target.result);
-      reader.readAsDataURL(file);
-    } else {
-      submit('', '', '');
-    }
+    const onFail = () => {
+      status.textContent = '✗ Something went wrong. Please try again.';
+      status.className = 'status-msg err';
+      btn.disabled    = false;
+      btn.textContent = 'Submit Application';
+    };
+
+    // Request 1: text data
+    post({ type: 'data', name, phone, email, message })
+      .then(() => {
+        if (!file) { onDone(); return; }
+        // Request 2: file — sent 1.5s later so the row exists before the script tries to update it
+        const reader = new FileReader();
+        reader.onload = ev => {
+          setTimeout(() => {
+            post({ type: 'file', email, resumeName: file.name, resumeType: file.type || 'application/octet-stream', resumeData: ev.target.result })
+              .then(onDone).catch(onFail);
+          }, 1500);
+        };
+        reader.readAsDataURL(file);
+      })
+      .catch(onFail);
   });
 </script>
 
