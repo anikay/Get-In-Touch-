@@ -109,6 +109,25 @@
     }
     .about-body strong { color: var(--text); }
 
+    .learn-more-btn {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 10px 22px;
+      border: 1px solid rgba(74,206,255,0.4);
+      border-radius: 8px;
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+    .learn-more-btn:hover {
+      background: rgba(74,206,255,0.08);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
     .chips {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -151,7 +170,10 @@
       border-radius: 10px;
       padding: 16px 18px 16px 20px;
       background: rgba(4,117,255,0.04);
-      cursor: default;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
       transition: border-color 0.2s, background 0.2s, transform 0.18s;
       overflow: hidden;
     }
@@ -320,9 +342,7 @@
 <body>
 
 <header>
-  <div class="logo">Velaura <em>AI</em></div>
-  <div class="hdivider"></div>
-  <div class="badge">Titan Core Initiative</div>
+  <svg width="107" height="24" viewBox="0 0 161 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M27.165 21.3525L23.7725 27.6221L22.792 29.4346L19.3594 35.7773L15.9277 29.4346L19.3594 23.0918L20.3398 21.2793L23.7334 15.0088L31.8545 0.000976562H38.7188L27.165 21.3525ZM22.8701 13.1973L19.4775 19.4678L18.4961 21.2793L15.0645 27.623L11.6514 21.3164L15.084 14.9736L16.0645 13.1611L19.457 6.89062L23.1855 0.000976562H30.0107L22.8701 13.1973ZM14.1621 13.4873L10.7295 19.8301L0 0H6.86426L14.1621 13.4873ZM18.5361 5.4043L15.1426 11.6748L8.8252 0.000976562H15.6113L18.5361 5.4043Z" fill="url(#hdr_grad)"/><path d="M50.4961 6.21878L56.0963 23.8225H56.3112L61.9227 6.21878H67.3531L59.3659 29.3887H53.053L45.0544 6.21878H50.4961ZM75.5079 29.7281C73.7204 29.7281 72.1818 29.366 70.892 28.642C69.6098 27.9104 68.6218 26.8771 67.9279 25.5421C67.234 24.1996 66.8871 22.6119 66.8871 20.7792C66.8871 18.9916 67.234 17.4228 67.9279 16.0728C68.6218 14.7227 69.5985 13.6706 70.8581 12.9163C72.1252 12.1621 73.611 11.785 75.3156 11.785C76.462 11.785 77.5292 11.9698 78.5173 12.3393C79.5129 12.7014 80.3802 13.2482 81.1194 13.9798C81.8661 14.7114 82.4468 15.6315 82.8616 16.7403C83.2765 17.8414 83.4839 19.1312 83.4839 20.6095V21.9331H68.8104V18.9464H78.9472C78.9472 18.2525 78.7963 17.6378 78.4947 17.1023C78.193 16.5668 77.7744 16.1482 77.2389 15.8465C76.7109 15.5373 76.0962 15.3827 75.3948 15.3827C74.6632 15.3827 74.0145 15.5524 73.4489 15.8918C72.8907 16.2236 72.4533 16.6724 72.1365 17.2381C71.8197 17.7962 71.6576 18.4184 71.65 19.1048V21.9444C71.65 22.8043 71.8084 23.5472 72.1252 24.1732C72.4495 24.7992 72.9058 25.2819 73.4941 25.6213C74.0824 25.9607 74.7801 26.1304 75.5871 26.1304C76.1226 26.1304 76.6129 26.055 77.0578 25.9041C77.5028 25.7533 77.8837 25.527 78.2005 25.2253C78.5173 24.9236 78.7586 24.5541 78.9246 24.1166L83.3821 24.4108C83.1558 25.4818 82.6919 26.417 81.9905 27.2165C81.2966 28.0084 80.3991 28.6269 79.2979 29.0719C78.2043 29.5093 76.9409 29.7281 75.5079 29.7281ZM90.9457 6.21878V29.3887H86.1262V6.21878H90.9457ZM99.2588 29.7168C98.1501 29.7168 97.1621 29.5244 96.2947 29.1398C95.4274 28.7476 94.741 28.1706 94.2357 27.4088C93.7379 26.6395 93.489 25.6816 93.489 24.5352C93.489 23.5698 93.6662 22.759 94.0207 22.1028C94.3752 21.4466 94.8579 20.9187 95.4688 20.5189C96.0798 20.1192 96.7737 19.8175 97.5505 19.6139C98.3349 19.4102 99.157 19.2669 100.017 19.184C101.028 19.0784 101.842 18.9803 102.461 18.8898C103.079 18.7918 103.528 18.6485 103.807 18.4599C104.086 18.2713 104.225 17.9923 104.225 17.6227V17.5548C104.225 16.8383 103.999 16.284 103.547 15.8918C103.102 15.4996 102.468 15.3035 101.646 15.3035C100.779 15.3035 100.088 15.4958 99.5756 15.8804C99.0627 16.2576 98.7233 16.7327 98.5574 17.3059L94.0999 16.9439C94.3262 15.888 94.7712 14.9754 95.4349 14.2061C96.0986 13.4292 96.9547 12.8334 98.003 12.4185C99.059 11.9962 100.281 11.785 101.669 11.785C102.634 11.785 103.558 11.8981 104.44 12.1244C105.33 12.3507 106.119 12.7014 106.805 13.1765C107.499 13.6517 108.046 14.2626 108.445 15.0093C108.845 15.7485 109.045 16.6347 109.045 17.668V29.3887H104.474V26.9789H104.339C104.06 27.522 103.686 28.0009 103.219 28.4157C102.751 28.823 102.189 29.1435 101.533 29.3774C100.877 29.6036 100.119 29.7168 99.2588 29.7168ZM100.639 26.3906C101.348 26.3906 101.974 26.2511 102.517 25.972C103.06 25.6854 103.486 25.3008 103.796 24.818C104.105 24.3353 104.259 23.7885 104.259 23.1776V21.3335C104.109 21.4316 103.901 21.5221 103.637 21.605C103.381 21.6805 103.09 21.7521 102.766 21.82C102.442 21.8803 102.117 21.9369 101.793 21.9897C101.469 22.0349 101.175 22.0764 100.911 22.1141C100.345 22.1971 99.8509 22.3291 99.4285 22.5101C99.0062 22.6911 98.6781 22.9362 98.4443 23.2455C98.2105 23.5472 98.0936 23.9243 98.0936 24.3768C98.0936 25.033 98.3311 25.5346 98.8063 25.8815C99.289 26.2209 99.8999 26.3906 100.639 26.3906ZM123.425 21.9897V12.0113H128.244V29.3887H123.617V26.2322H123.436C123.044 27.2504 122.392 28.0688 121.479 28.6872C120.574 29.3057 119.469 29.6149 118.164 29.6149C117.003 29.6149 115.981 29.351 115.098 28.823C114.216 28.295 113.526 27.5446 113.028 26.5716C112.538 25.5987 112.289 24.4334 112.281 23.0758V12.0113H117.101V22.216C117.108 23.2417 117.384 24.0525 117.927 24.6483C118.47 25.2442 119.197 25.5421 120.11 25.5421C120.691 25.5421 121.234 25.4101 121.739 25.1461C122.245 24.8746 122.652 24.4749 122.961 23.9469C123.278 23.419 123.432 22.7665 123.425 21.9897ZM131.597 29.3887V12.0113H136.269V15.0432H136.45C136.767 13.9647 137.299 13.1501 138.045 12.5995C138.792 12.0414 139.652 11.7624 140.625 11.7624C140.866 11.7624 141.126 11.7774 141.405 11.8076C141.684 11.8378 141.93 11.8793 142.141 11.9321V16.2085C141.914 16.1407 141.601 16.0803 141.202 16.0275C140.802 15.9747 140.436 15.9483 140.104 15.9483C139.395 15.9483 138.762 16.1029 138.204 16.4122C137.653 16.7139 137.216 17.1362 136.891 17.6793C136.575 18.2223 136.416 18.8483 136.416 19.5573V29.3887H131.597ZM148.587 29.7168C147.478 29.7168 146.49 29.5244 145.623 29.1398C144.756 28.7476 144.069 28.1706 143.564 27.4088C143.066 26.6395 142.817 25.6816 142.817 24.5352C142.817 23.5698 142.995 22.759 143.349 22.1028C143.704 21.4466 144.186 20.9187 144.797 20.5189C145.408 20.1192 146.102 19.8175 146.879 19.6139C147.663 19.4102 148.485 19.2669 149.345 19.184C150.356 19.0784 151.17 18.9803 151.789 18.8898C152.407 18.7918 152.856 18.6485 153.135 18.4599C153.414 18.2713 153.554 17.9923 153.554 17.6227V17.5548C153.554 16.8383 153.328 16.284 152.875 15.8918C152.43 15.4996 151.796 15.3035 150.974 15.3035C150.107 15.3035 149.417 15.4958 148.904 15.8804C148.391 16.2576 148.052 16.7327 147.886 17.3059L143.428 16.9439C143.655 15.888 144.1 14.9754 144.763 14.2061C145.427 13.4292 146.283 12.8334 147.331 12.4185C148.387 11.9962 149.609 11.785 150.997 11.785C151.962 11.785 152.886 11.8981 153.769 12.1244C154.659 12.3507 155.447 12.7014 156.133 13.1765C156.827 13.6517 157.374 14.2626 157.774 15.0093C158.173 15.7485 158.373 16.6347 158.373 17.668V29.3887H153.803V26.9789H153.667C153.388 27.522 153.015 28.0009 152.547 28.4157C152.079 28.823 151.517 29.1435 150.861 29.3774C150.205 29.6036 149.447 29.7168 148.587 29.7168ZM149.967 26.3906C150.676 26.3906 151.302 26.2511 151.845 25.972C152.389 25.6854 152.815 25.3008 153.124 24.818C153.433 24.3353 153.588 23.7885 153.588 23.1776V21.3335C153.437 21.4316 153.229 21.5221 152.965 21.605C152.709 21.6805 152.419 21.7521 152.094 21.82C151.77 21.8803 151.446 21.9369 151.121 21.9897C150.797 22.0349 150.503 22.0764 150.239 22.1141C149.673 22.1971 149.179 22.3291 148.757 22.5101C148.335 22.6911 148.006 22.9362 147.773 23.2455C147.539 23.5472 147.422 23.9243 147.422 24.3768C147.422 25.033 147.66 25.5346 148.135 25.8815C148.617 26.2209 149.228 26.3906 149.967 26.3906Z" fill="white"/><defs><linearGradient id="hdr_grad" x1="25.9817" y1="30.2404" x2="15.7597" y2="5.11092" gradientUnits="userSpaceOnUse"><stop stop-color="#4ACEFF"/><stop offset="1" stop-color="#0475FF"/></linearGradient></defs></svg>
 </header>
 
 <div class="columns">
@@ -330,14 +350,16 @@
   <!-- ── SECTION 1: ABOUT ── -->
   <div class="col">
     <div class="eyebrow">About</div>
-    <div class="titan-name">Titan Core</div>
+    <div class="titan-name">Titan Core™</div>
 
     <p class="about-body">
-      Velaura AI, Inc. (formerly Auradine) is a leader in ultra-low power compute solutions for data center, edge, and physical AI applications. Power is becoming the critical bottleneck for AI infrastructure at scale. Velaura's patented technology, <strong>Titan Core™</strong>, helps AI compute platforms deliver dramatically higher power efficiency.
+      Velaura AI, Inc. is a leader in ultra-low power compute solutions for data center, edge, and physical AI applications. Power is becoming the critical bottleneck for AI infrastructure at scale. Velaura's patented technology, <strong>Titan Core™</strong>, helps AI compute platforms deliver dramatically higher power efficiency.
     </p>
     <p class="about-body">
       Titan Core™ enables up to <strong>2X lower overall chip power</strong>, with potential savings of up to <strong>500W per XPU</strong> and substantial reductions in energy, cooling, and infrastructure costs at hyperscale.<br><br>Built on a production-proven foundation with tens of millions of ASICs deployed with world-class yield and reliability, Titan Core™ integrates seamlessly into existing architectures while delivering meaningful improvements in total cost of ownership.
     </p>
+
+    <a href="https://velaura.ai/low-power-ai-compute/" target="_blank" rel="noopener" class="learn-more-btn">Learn More →</a>
 
   </div>
 
@@ -351,52 +373,52 @@
     </p>
 
     <div class="job-list">
-      <div class="job-card">
+      <a class="job-card" href="https://velaura.ai/job/soc-architect-robotics-physical-ai/" target="_blank" rel="noopener">
         <div class="job-title">SoC Architect – Robotics &amp; Physical AI</div>
         <div class="tags">
           <span class="tag">Hardware</span>
           <span class="tag">SoC Design</span>
           <span class="tag">Full-time</span>
         </div>
-      </div>
-      <div class="job-card">
+      </a>
+      <a class="job-card" href="https://velaura.ai/job/robotics-autonomy-systems-architect/" target="_blank" rel="noopener">
         <div class="job-title">Robotics &amp; Autonomy Systems Architect</div>
         <div class="tags">
           <span class="tag">Robotics</span>
           <span class="tag">Autonomy</span>
           <span class="tag">Full-time</span>
         </div>
-      </div>
-      <div class="job-card">
+      </a>
+      <a class="job-card" href="https://velaura.ai/job/performance-modeling-architect-ai-systems/" target="_blank" rel="noopener">
         <div class="job-title">Performance Modeling Architect – AI Systems</div>
         <div class="tags">
           <span class="tag">Modeling</span>
           <span class="tag">AI Systems</span>
           <span class="tag">Full-time</span>
         </div>
-      </div>
-      <div class="job-card">
+      </a>
+      <a class="job-card" href="https://velaura.ai/job/ai-systems-architect-models-hardware-co-design/" target="_blank" rel="noopener">
         <div class="job-title">AI Systems Architect (Models &amp; Hardware Co-Design)</div>
         <div class="tags">
           <span class="tag">Co-Design</span>
           <span class="tag">AI Hardware</span>
           <span class="tag">Full-time</span>
         </div>
-      </div>
-      <div class="job-card">
+      </a>
+      <a class="job-card" href="https://velaura.ai/job/ai-research-architect/" target="_blank" rel="noopener">
         <div class="job-title">AI Research Architect</div>
         <div class="tags">
           <span class="tag">Research</span>
           <span class="tag">AI / ML</span>
           <span class="tag">Full-time</span>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 
   <!-- ── SECTION 3: CONTACT FORM ── -->
   <div class="col">
-    <div class="eyebrow">Apply</div>
+    <div class="eyebrow">Reach Out</div>
     <div class="col-title" style="margin-bottom: 20px;">Get in Touch</div>
     <form id="appForm" novalidate>
       <div class="form-group">
@@ -426,7 +448,7 @@
         </div>
       </div>
 
-      <button type="submit" class="btn-submit" id="submitBtn">Submit Application</button>
+      <button type="submit" class="btn-submit" id="submitBtn">Submit</button>
       <div class="status-msg" id="statusMsg"></div>
     </form>
   </div>
