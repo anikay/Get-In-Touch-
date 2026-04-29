@@ -456,7 +456,7 @@
 </div>
 
 <script>
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxe8MtBeBNySzY4bVt30tZxCNZIgweKZZSwJSdxEamWYEkk5ZXOm0qBh9_kMUknXsCl/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbylswUtI0IzpsBLfebIJx8nnPRgCzR8cjxIg3yNnCFVKo8CM6PdJmGeDeV_gNUJ67jh/exec';
 
   const resumeInput = document.getElementById('fresume');
   const fileChosen  = document.getElementById('fileChosen');
@@ -493,47 +493,54 @@
       return;
     }
 
+    if (file && file.size > 5 * 1024 * 1024) {
+      status.textContent = 'File too large — please upload under 5 MB.';
+      status.className = 'status-msg err';
+      return;
+    }
+
     btn.disabled    = true;
     btn.textContent = file ? 'Uploading…' : 'Submitting…';
     status.className = 'status-msg';
 
-    const post = body => fetch(SCRIPT_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(body)
-    });
-
     const onDone = () => {
-      status.textContent = '✓ Application submitted! We\'ll be in touch soon.';
+      status.textContent = '✓ Message received! Thank you.';
       status.className = 'status-msg ok';
       document.getElementById('appForm').reset();
       fileChosen.style.display = 'none';
       btn.disabled    = false;
-      btn.textContent = 'Submit Application';
+      btn.textContent = 'Submit';
     };
 
     const onFail = () => {
       status.textContent = '✗ Something went wrong. Please try again.';
       status.className = 'status-msg err';
       btn.disabled    = false;
-      btn.textContent = 'Submit Application';
+      btn.textContent = 'Submit';
     };
 
-    // Request 1: text data
-    post({ type: 'data', name, phone, email, message })
-      .then(() => {
-        if (!file) { onDone(); return; }
-        // Request 2: file — sent 1.5s later so the row exists before the script tries to update it
-        const reader = new FileReader();
-        reader.onload = ev => {
-          setTimeout(() => {
-            post({ type: 'file', email, resumeName: file.name, resumeType: file.type || 'application/octet-stream', resumeData: ev.target.result })
-              .then(onDone).catch(onFail);
-          }, 1500);
-        };
-        reader.readAsDataURL(file);
-      })
-      .catch(onFail);
+    const send = resumeData => {
+      const payload = { name, phone, email, message };
+      if (resumeData) {
+        payload.resumeName = file.name;
+        payload.resumeType = file.type || 'application/octet-stream';
+        payload.resumeData = resumeData;
+      }
+      fetch(SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload)
+      }).then(onDone).catch(onFail);
+    };
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload  = ev => send(ev.target.result);
+      reader.onerror = onFail;
+      reader.readAsDataURL(file);
+    } else {
+      send(null);
+    }
   });
 </script>
 
